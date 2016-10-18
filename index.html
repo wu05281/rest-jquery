@@ -8,10 +8,22 @@
     <script type="text/javascript" language="javascript">
         $(document).ready(function() {
             $("#driver").click(function(event){
-                $.getJSON('http://localhost:1111/users/1', function(jd) {
-                    $('#stage').html('<p> id: ' + jd.id + '</p>');
-                    $('#stage').append('<p>name : ' + jd.name+ '</p>');
-                    $('#stage').append('<p> age: ' + jd.age+ '</p>');
+//                $.getJSON('http://localhost:1111/users/1', function(jd) {
+//                    $('#stage').html('<p> id: ' + jd.id + '</p>');
+//                    $('#stage').append('<p>name : ' + jd.name+ '</p>');
+//                    $('#stage').append('<p> age: ' + jd.age+ '</p>');
+//                });
+                $.ajax({
+                    type: "GET",
+                    url: "http://localhost:1111/users/1",
+                    beforeSend: function(request) {
+                        request.setRequestHeader("authorization", "be4101f70b65419a8cfeb7ba74e5bb9e");
+                    },
+                    success: function(jd) {
+                        $('#stage').html('<p> id: ' + jd.id + '</p>');
+                        $('#stage').append('<p>name : ' + jd.name+ '</p>');
+                        $('#stage').append('<p> age: ' + jd.age+ '</p>');
+                    }
                 });
             });
         });
